@@ -49,8 +49,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\BuyHistoryControllerTest.cs" />
+    <Compile Include="Controllers\CartControllerTest.cs" />
+    <Compile Include="Controllers\ResultControllerTest.cs" />
+    <Compile Include="Controllers\ProductControllerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\HomeControllerTest.cs" />
+    <Compile Include="Repository\TestCategoryRepository.cs" />
+    <Compile Include="Repository\TestOrderRepository.cs" />
+    <Compile Include="Repository\TestProductRepository.cs" />
+    <Compile Include="Utils\TestMocks.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App.config" />

@@ -1,0 +1,15 @@
+﻿# Testing Framework のテスト結果を無視
+#
+TestResults
+
+# プロジェクトのビルドｄデータ
+*.suo
+
+# BtoCRazorDemo 本体のビルド結果データ
+BtoCRazorDemo/bin
+BtoCRazorDemo/obj
+
+# BtoCRazorDemo.Test のビルド結果データ
+BtoCRazorDemo.Test/bin
+BtoCRazorDemo.Test/obj
+
