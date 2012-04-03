@@ -12,6 +12,6 @@ BtoCRazorDemo/bin
 BtoCRazorDemo/obj
 
 # BtoCRazorDemo.Test のビルド結果データ
-"BtoCRazorDemo.Test/bin"
-"BtoCRazorDemo.Test/obj"
+BtoCRazorDemo.Test/bin/*
+BtoCRazorDemo.Test/obj/*
 
