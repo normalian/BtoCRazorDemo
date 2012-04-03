@@ -1,0 +1,64 @@
+﻿@model IQueryable<BtoCRazorDemo.Models.ProductViewModel>
+@{
+    ViewBag.Title = "カートの中身一覧画面";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>
+    カートの中身</h2>
+@using (Html.BeginForm()){
+<table>
+    <thead>
+        <tr>
+            <td>
+                製品イメージ
+            </td>
+            <td>
+                製品名
+            </td>
+            <td>
+                単価
+            </td>
+            <td>
+                数量
+            </td>
+            <td>
+                価格
+            </td>
+            <td>
+                操作
+            </td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var viewProduct in Model)
+        {
+            <tr>
+                <td>
+                    <img src="@Url.Content("~/Content/img/Products/" + viewProduct.ImageFileUrl)" alt="製品イメージ" />
+                </td>
+                <td>
+                    @viewProduct.ProductName
+                </td>
+                <td>
+                    @string.Format("{0:#.###円}", viewProduct.Price)
+                </td>
+                <td>
+                    @viewProduct.Qty
+                </td>
+                <td>
+                    @string.Format("{0:#.###円}", viewProduct.Price * viewProduct.Qty)
+                </td>
+                <td>
+                    @Html.ActionLink("削除", "Delete", new { detailID = viewProduct.OrderID })
+                </td>
+            </tr>
+        }
+        <tr>
+            <td colspan="6">
+                @string.Format("{0:合計#.###円です。}", ViewBag.TotalMoney)
+            </td>
+        </tr>
+    </tbody>
+</table>
+<input type="submit" value="確定画面へ" />
+} 

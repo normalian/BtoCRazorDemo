@@ -14,40 +14,40 @@ namespace BtoCRazorDemo.Tests.Models
         public TestOrderRepository()
         {
             ////一つ目
-            //var order = new Order()
-            //{
-            //    OrderDate = DateTime.Now,
-            //    Purchaser = "TestUser",
-            //    TxID = "1",
-            //    Valid = false,
-            //};
-            //var orderDetail = new OrderDetail()
-            //{
-            //    ID = 1,
-            //    Price = 100,
-            //    Qty = 10,
-            //    TxID = "1"
-            //};
-            //order.OrderDetails.Add(orderDetail);
-            //pool.Add(order);
+            var order = new Order()
+            {
+                OrderDate = DateTime.Now,
+                Purchaser = "TestUser",
+                TxID = "1",
+                Valid = false,
+            };
+            var orderDetail = new OrderDetail()
+            {
+                ID = 1,
+                Price = 100,
+                Qty = 10,
+                TxID = "1"
+            };
+            order.OrderDetails.Add(orderDetail);
+            pool.Add(order);
 
-            ////二つ目
-            //var order2 = new Order()
-            //{
-            //    OrderDate = DateTime.Now,
-            //    Purchaser = "TestUser",
-            //    TxID = "2",
-            //    Valid = false,
-            //};
-            //var orderDetail2 = new OrderDetail()
-            //{
-            //    ID = 2,
-            //    Price = 100,
-            //    Qty = 10,
-            //    TxID = "2"
-            //};
-            //order2.OrderDetails.Add(orderDetail2);
-            //pool.Add(order2);
+            //二つ目
+            var order2 = new Order()
+            {
+                OrderDate = DateTime.Now,
+                Purchaser = "TestUser",
+                TxID = "2",
+                Valid = false,
+            };
+            var orderDetail2 = new OrderDetail()
+            {
+                ID = 2,
+                Price = 100,
+                Qty = 10,
+                TxID = "2"
+            };
+            order2.OrderDetails.Add(orderDetail2);
+            pool.Add(order2);
         }
 
         public IQueryable<Order> GetAll()

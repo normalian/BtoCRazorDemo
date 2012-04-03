@@ -187,19 +187,19 @@ namespace BtoCRazorDemo.Tests.Controllers
         [TestMethod()]
         public void Delete02Test()
         {
-            //var orderRepository = new TestOrderRepository();
-            //CartController target = new CartController(orderRepository, new TestProductRepository());
-            //ControllerContext context = new ControllerContext(new MockHttpContext(), new RouteData(), target);
-            //context.HttpContext.Session["TxID"] = "1";
-            //target.ControllerContext = context;
+            var orderRepository = new TestOrderRepository();
+            CartController target = new CartController(orderRepository, new TestProductRepository());
+            ControllerContext context = new ControllerContext(new MockHttpContext(), new RouteData(), target);
+            context.HttpContext.Session["TxID"] = "1";
+            target.ControllerContext = context;
 
-            //int beforeNum = orderRepository.GetByTxID("1").OrderDetails.Count;
-            //int detailID = -100;
-            //int expectedNum = beforeNum ;
-            //RedirectToRouteResult actual = target.Delete(detailID) as RedirectToRouteResult;
-            //int actualNum = orderRepository.GetByTxID("1").OrderDetails.Count;
-            //Assert.AreEqual(expectedNum, actualNum);
-            //Assert.IsNotNull(actual);
+            int beforeNum = orderRepository.GetByTxID("1").OrderDetails.Count;
+            int detailID = -100;
+            int expectedNum = beforeNum;
+            RedirectToRouteResult actual = target.Delete(detailID) as RedirectToRouteResult;
+            int actualNum = orderRepository.GetByTxID("1").OrderDetails.Count;
+            Assert.AreEqual(expectedNum, actualNum);
+            Assert.IsNotNull(actual);
         }
     }
 }

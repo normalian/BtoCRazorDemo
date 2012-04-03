@@ -7,7 +7,6 @@ using System.Web.Mvc.Ajax;
 
 namespace BtoCRazorDemo.Controllers
 {
-    [HandleError]
     public class ResultController : Controller
     {
         //

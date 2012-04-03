@@ -1,0 +1,52 @@
+﻿@model IQueryable<BtoCRazorDemo.Models.Product>
+@{
+    ViewBag.Title = "ProductIndex";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>@ViewBag.CategoryName
+    &gt; 製品一覧</h2>
+@using (Html.BeginForm())
+{ 
+    <table>
+        <thead>
+            <tr>
+                <td>
+                    イメージ
+                </td>
+                <td>
+                    製品名
+                </td>
+                <td>
+                    価格
+                </td>
+                <td>
+                    説明
+                </td>
+                <td>
+                </td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var product in Model)
+            { 
+                <tr>
+                    <td>
+                        <img alt="製品イメージ図" src="../../Content/img/Products/@product.ImageFileUrl" />
+                    </td>
+                    <td>
+                        @product.ProductName
+                    </td>
+                    <td>
+                        @string.Format("{0:#.###円}", product.Price)
+                    </td>
+                    <td>
+                        @product.Description
+                    </td>
+                    <td>
+                        @Html.ActionLink("商品数量の決定画面へ", "Edit", new { productId = product.ProductID })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

@@ -11,7 +11,6 @@ namespace BtoCRazorDemo.Controllers
     using BtoCRazorDemo.Models;
 
     [Authorize]
-    [HandleError]
     public class BuyHistoryController : Controller
     {
         readonly IOrderRepository<Order> orderRepository;

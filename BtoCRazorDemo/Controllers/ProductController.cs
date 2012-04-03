@@ -49,7 +49,7 @@ namespace BtoCRazorDemo.Controllers
             try
             {
                 var category = categoryRepository.GetByID(categoryId);
-                ViewData["CategoryName"] = category.CategoryName;
+                ViewBag.CategoryName = category.CategoryName;
                 return View(category.Products.AsQueryable());
             }
             catch (Exception e)
@@ -75,7 +75,7 @@ namespace BtoCRazorDemo.Controllers
             }
         }
 
-        [AcceptVerbs(HttpVerbs.Post)]
+        [HttpPost]
         [Authorize]
         public ActionResult Edit(int? number, int productID, string txID)
         {

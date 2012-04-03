@@ -9,10 +9,9 @@ using System.Diagnostics;
 namespace BtoCRazorDemo.Controllers
 {
     using BtoCRazorDemo.Models;
-    //using BtoCRazorDemo.Utils;
+    using BtoCRazorDemo.Utils;
 
     [Authorize]
-    [HandleError]
     public class CartController : Controller
     {
         readonly IOrderRepository<Order> orderRepository;
@@ -23,7 +22,7 @@ namespace BtoCRazorDemo.Controllers
         {
         }
 
-        public CartController(IOrderRepository<Order> orderRepository,IProductRepository<Product> productRepository)
+        public CartController(IOrderRepository<Order> orderRepository, IProductRepository<Product> productRepository)
         {
             this.orderRepository = orderRepository;
             this.productRepository = productRepository;
@@ -40,14 +39,12 @@ namespace BtoCRazorDemo.Controllers
             }
             else
             {
-                ViewData["TotalMoney"] = order.OrderDetails.Select(detail => detail.Price * detail.Qty).Sum();
-                //var query = order.OrderDetails.Select(detail => Utility.ConvertProduct2ViewModel(productRepository, detail)).AsQueryable();
-                //return View(query);
-                return View();
+                ViewBag.TotalMoney = order.OrderDetails.Select(detail => detail.Price * detail.Qty).Sum();
+                return View(order.OrderDetails.Select(detail => Utility.ConvertProduct2ViewModel(productRepository, detail)).AsQueryable());
             }
         }
 
-        [AcceptVerbs(HttpVerbs.Post)]
+        [HttpPost]
         public ActionResult Index(FormCollection collection)
         {
             try
@@ -86,6 +83,7 @@ namespace BtoCRazorDemo.Controllers
             {
                 Trace.WriteLine("カート内データの削除に失敗しました");
                 Trace.WriteLine(e);
+                throw;
             }
             return RedirectToAction("Index");
         }

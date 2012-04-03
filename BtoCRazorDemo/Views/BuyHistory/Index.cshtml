@@ -1,0 +1,59 @@
+﻿@model IQueryable<BtoCRazorDemo.Models.Order>
+@{
+    ViewBag.Title = "購入履歴";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>
+    購入履歴画面</h2>
+@foreach (var order in Model)
+{ 
+    <fieldset>
+        <legend>
+            @string.Format("{0:D}&nbsp;{0:t}&nbsp;", order.OrderDate)
+            に購入した品</legend>
+        <table>
+            <thead>
+                <tr>
+                    <td>
+                        製品ID
+                    </td>
+                    <td>
+                        単価
+                    </td>
+                    <td>
+                        数量
+                    </td>
+                    <td>
+                        価格
+                    </td>
+                    <td>
+                        詳細画面へのリンク
+                    </td>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var orderDetails in order.OrderDetails)
+                {
+                    <tr>
+                        <td>
+                            @orderDetails.ProductID
+                        </td>
+                        <td>
+                            @string.Format("{0:#.###円}", orderDetails.Price)
+                        </td>
+                        <td>
+                            @orderDetails.Qty
+                        </td>
+                        <td>
+                            @string.Format("{0:#.###円}", orderDetails.Price * orderDetails.Qty)
+                        </td>
+                        <td>
+                            @Html.ActionLink("購入画面へ", "Edit", "Product", new { productId = orderDetails.ProductID }, null)
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </fieldset>
+    <br />
+}

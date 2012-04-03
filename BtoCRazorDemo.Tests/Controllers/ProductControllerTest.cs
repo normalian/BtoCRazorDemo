@@ -146,21 +146,21 @@ namespace BtoCRazorDemo.Tests.Controllers
             //Assert.IsNotNull(actual);
         }
 
-        /// <summary>
-        ///A test for ExtractOrder
-        ///</summary>
-        [TestMethod()]
-        [ExpectedException(typeof(NullReferenceException))]
-        public void ExtractOrder02Test()
-        {
-            //var orderRepository = new TestOrderRepository();
-            //ProductController_Accessor target = new ProductController_Accessor(new TestCategoryRepository(),
-            //    new TestProductRepository(), orderRepository);
-            //string txID = "aaaa";
-            //Order actual;
-            //actual = target.ExtractOrder(txID);
-            //Assert.IsNull(actual);
-        }
+        ///// <summary>
+        /////A test for ExtractOrder
+        /////</summary>
+        //[TestMethod()]
+        //[ExpectedException(typeof(NullReferenceException))]
+        //public void ExtractOrder02Test()
+        //{
+        //    var orderRepository = new TestOrderRepository();
+        //    ProductController_Accessor target = new ProductController_Accessor(new TestCategoryRepository(),
+        //        new TestProductRepository(), orderRepository);
+        //    string txID = "aaaa";
+        //    Order actual;
+        //    actual = target.ExtractOrder(txID);
+        //    Assert.IsNull(actual);
+        //}
 
         /// <summary>
         ///A test for Edit

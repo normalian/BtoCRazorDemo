@@ -9,6 +9,8 @@ using System.Web.Routing;
 
 namespace BtoCRazorDemo
 {
+    using BtoCRazorDemo.Utils;
+
     // Note: For instructions on enabling IIS6 or IIS7 classic mode, 
     // visit http://go.microsoft.com/?LinkId=9394801
 
@@ -44,6 +46,17 @@ namespace BtoCRazorDemo
             RegisterRoutes(RouteTable.Routes);
 
             BundleTable.Bundles.RegisterTemplateBundles();
+        }
+
+      
+        protected void Session_Start(object sender, EventArgs e)
+        {
+            //一度注文確定し、再度セッションが開始された場合に実行される
+            if (User.Identity.IsAuthenticated)
+            {
+                //注文IDを挿入
+                Session["TxID"] = Utility.TxProcessing();
+            }
         }
     }
 }

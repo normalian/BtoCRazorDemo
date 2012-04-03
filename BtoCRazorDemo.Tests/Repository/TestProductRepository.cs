@@ -7,12 +7,6 @@ namespace BtoCRazorDemo.Tests.Models
 {
     using BtoCRazorDemo.Models;
 
-    //    IQueryable<T> GetAll();
-    //T GetByID(int id);
-    //T GetByName(string name);
-    //void Add(T category);
-    //void Remove(T category);
-    //void Save();
 
     public class TestProductRepository : IProductRepository<Product>
     {

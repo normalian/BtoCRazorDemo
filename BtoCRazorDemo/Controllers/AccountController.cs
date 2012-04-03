@@ -8,6 +8,7 @@ using BtoCRazorDemo.Models;
 
 namespace BtoCRazorDemo.Controllers
 {
+    using BtoCRazorDemo.Utils;
 
     [Authorize]
     public class AccountController : Controller
@@ -34,6 +35,10 @@ namespace BtoCRazorDemo.Controllers
                 if (Membership.ValidateUser(model.UserName, model.Password))
                 {
                     FormsAuthentication.SetAuthCookie(model.UserName, model.RememberMe);
+
+                    //注文IDを挿入
+                    Session["TxID"] = Utility.TxProcessing();
+                    
                     return Json(new { success = true, redirect = returnUrl });
                 }
                 else
@@ -58,6 +63,11 @@ namespace BtoCRazorDemo.Controllers
                 if (Membership.ValidateUser(model.UserName, model.Password))
                 {
                     FormsAuthentication.SetAuthCookie(model.UserName, model.RememberMe);
+
+
+                    //注文IDを挿入
+                    Session["TxID"] = Utility.TxProcessing();
+                    
                     if (Url.IsLocalUrl(returnUrl))
                     {
                         return Redirect(returnUrl);

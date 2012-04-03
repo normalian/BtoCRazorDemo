@@ -1,0 +1,37 @@
+﻿@model BtoCRazorDemo.Models.Product
+@{
+    ViewBag.Title = "購入数量の決定画面";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>
+    購入数量の決定</h2>
+@Html.ValidationSummary()
+@using (Html.BeginForm())
+{ 
+    <div>
+        <table>
+            <tr>
+                <td rowspan="2">
+                    <img src="@Url.Content("~/Content/img/Products/" + Model.ImageFileUrl)" alt="製品イメージ" />
+                </td>
+                <td>
+                    <div>
+                        数量
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div>
+                        @Html.TextBox("number", "1")
+                        個
+                        @Html.ValidationMessage("number")
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <input type="submit" value="カートに入れる" />
+    @Html.Hidden("txID", Session["TxID"])
+    @Html.Hidden("productID", Model.ProductID)
+}
