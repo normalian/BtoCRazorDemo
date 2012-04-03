@@ -16,31 +16,31 @@ namespace BtoCRazorDemo.Models
 
     public class TxSeedRepository : ITxSeedRepository<TxSeed>
     {
-        readonly protected BtoCDataClassesDataContext dataContext;
+        readonly protected B2CDbEntities dbEntities;
 
         public TxSeedRepository()
         {
-            dataContext = new BtoCDataClassesDataContext();
+            dbEntities = new B2CDbEntities();
         }
 
         public IQueryable<TxSeed> GetAll()
         {
-            return dataContext.TxSeeds.AsQueryable();
+            return dbEntities.TxSeeds.AsQueryable();
         }
 
         public int GetTxID()
         {
-            return dataContext.TxSeeds.Min(txSeed => txSeed.TxID);
+            return dbEntities.TxSeeds.Min(txSeed => txSeed.TxID);
         }
 
         public void SetTxID(int id)
         {
-            dataContext.TxSeeds.Single().TxID = id;
+            dbEntities.TxSeeds.Single().TxID = id;
         }
 
         public void Save()
         {
-            dataContext.SubmitChanges();
+            dbEntities.SaveChanges(System.Data.Objects.SaveOptions.None);
         }
     }
 }

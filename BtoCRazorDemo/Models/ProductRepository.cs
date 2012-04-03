@@ -18,46 +18,46 @@ namespace BtoCRazorDemo.Models
 
     public class ProductRepository : IProductRepository<Product>
     {
-        readonly protected BtoCDataClassesDataContext dataContext;
+        readonly protected B2CDbEntities dbEntities;
 
         public ProductRepository()
         {
-            dataContext = new BtoCDataClassesDataContext();
+            dbEntities = new B2CDbEntities();
         }
 
         public IQueryable<Product> GetAll()
         {
-            return dataContext.Products.AsQueryable();
+            return dbEntities.Products.AsQueryable();
         }
 
         public Product GetByID(int id)
         {
-            var inst = dataContext.Products.SingleOrDefault(product => product.ProductID == id);
+            var inst = dbEntities.Products.SingleOrDefault(product => product.ProductID == id);
             if (inst == null)
             {
-                throw new ArgumentOutOfRangeException("productIDが不正だと思われる");
+                throw new ArgumentOutOfRangeException("productIDが範囲外です");
             }
             return inst;
         }
 
         public Product GetByName(string name)
         {
-            return dataContext.Products.SingleOrDefault(product => product.ProductName == name);
+            return dbEntities.Products.SingleOrDefault(product => product.ProductName == name);
         }
 
         public void Add(Product product)
         {
-            dataContext.Products.InsertOnSubmit(product);
+            dbEntities.Products.AddObject(product);
         }
 
         public void Remove(Product product)
         {
-            dataContext.Products.DeleteOnSubmit(product);
+            dbEntities.Products.DeleteObject(product);
         }
 
         public void Save()
         {
-            dataContext.SubmitChanges();
+            dbEntities.SaveChanges();
         }
     }
 }

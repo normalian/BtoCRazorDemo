@@ -1,0 +1,265 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="B2CDbModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="B2CDbModelStoreContainer">
+          <EntitySet Name="Categories" EntityType="B2CDbModel.Store.Categories" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="OrderDetails" EntityType="B2CDbModel.Store.OrderDetails" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Orders" EntityType="B2CDbModel.Store.Orders" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Products" EntityType="B2CDbModel.Store.Products" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="TxSeeds" EntityType="B2CDbModel.Store.TxSeeds" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_OrderDetails_Orders" Association="B2CDbModel.Store.FK_OrderDetails_Orders">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="OrderDetails" EntitySet="OrderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Products_Categories" Association="B2CDbModel.Store.FK_Products_Categories">
+            <End Role="Categories" EntitySet="Categories" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Categories">
+          <Key>
+            <PropertyRef Name="CategoryID" />
+          </Key>
+          <Property Name="CategoryID" Type="int" Nullable="false" />
+          <Property Name="CategoryName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Description" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="OrderDetails">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="TxID" Type="nvarchar" Nullable="false" MaxLength="10" />
+          <Property Name="ProductID" Type="int" Nullable="false" />
+          <Property Name="Price" Type="money" Nullable="false" />
+          <Property Name="Qty" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Orders">
+          <Key>
+            <PropertyRef Name="TxID" />
+          </Key>
+          <Property Name="TxID" Type="nvarchar" Nullable="false" MaxLength="10" />
+          <Property Name="Purchaser" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="OrderDate" Type="smalldatetime" Nullable="false" />
+          <Property Name="Valid" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Products">
+          <Key>
+            <PropertyRef Name="ProductID" />
+          </Key>
+          <Property Name="ProductID" Type="int" Nullable="false" />
+          <Property Name="ProductName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Price" Type="money" />
+          <Property Name="ImageFileUrl" Type="nvarchar" MaxLength="50" />
+          <Property Name="Description" Type="nvarchar" MaxLength="50" />
+          <Property Name="CategoryID" Type="int" />
+        </EntityType>
+        <EntityType Name="TxSeeds">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="TxID" Type="int" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_OrderDetails_Orders">
+          <End Role="Orders" Type="B2CDbModel.Store.Orders" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="OrderDetails" Type="B2CDbModel.Store.OrderDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="TxID" />
+            </Principal>
+            <Dependent Role="OrderDetails">
+              <PropertyRef Name="TxID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Products_Categories">
+          <End Role="Categories" Type="B2CDbModel.Store.Categories" Multiplicity="0..1" />
+          <End Role="Products" Type="B2CDbModel.Store.Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categories">
+              <PropertyRef Name="CategoryID" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="B2CDbModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="B2CDbEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Categories" EntityType="B2CDbModel.Category" />
+          <EntitySet Name="OrderDetails" EntityType="B2CDbModel.OrderDetail" />
+          <EntitySet Name="Orders" EntityType="B2CDbModel.Order" />
+          <EntitySet Name="Products" EntityType="B2CDbModel.Product" />
+          <EntitySet Name="TxSeeds" EntityType="B2CDbModel.TxSeed" />
+          <AssociationSet Name="FK_Products_Categories" Association="B2CDbModel.FK_Products_Categories">
+            <End Role="Categories" EntitySet="Categories" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderDetails_Orders" Association="B2CDbModel.FK_OrderDetails_Orders">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="OrderDetails" EntitySet="OrderDetails" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="CategoryID" />
+          </Key>
+          <Property Name="CategoryID" Type="Int32" Nullable="false" />
+          <Property Name="CategoryName" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Description" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Products" Relationship="B2CDbModel.FK_Products_Categories" FromRole="Categories" ToRole="Products" />
+        </EntityType>
+        <EntityType Name="OrderDetail">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TxID" Type="String" Nullable="false" MaxLength="10" Unicode="true" FixedLength="false" />
+          <Property Name="ProductID" Type="Int32" Nullable="false" />
+          <Property Name="Price" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="Qty" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Orders" Relationship="B2CDbModel.FK_OrderDetails_Orders" FromRole="OrderDetails" ToRole="Orders" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="TxID" />
+          </Key>
+          <Property Name="TxID" Type="String" Nullable="false" MaxLength="10" Unicode="true" FixedLength="false" />
+          <Property Name="Purchaser" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="OrderDate" Type="DateTime" Nullable="false" />
+          <Property Name="Valid" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="OrderDetails" Relationship="B2CDbModel.FK_OrderDetails_Orders" FromRole="Orders" ToRole="OrderDetails" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="ProductID" />
+          </Key>
+          <Property Name="ProductID" Type="Int32" Nullable="false" />
+          <Property Name="ProductName" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Price" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="ImageFileUrl" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Description" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="CategoryID" Type="Int32" />
+          <NavigationProperty Name="Categories" Relationship="B2CDbModel.FK_Products_Categories" FromRole="Products" ToRole="Categories" />
+        </EntityType>
+        <EntityType Name="TxSeed">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="TxID" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+        </EntityType>
+        <Association Name="FK_Products_Categories">
+          <End Role="Categories" Type="B2CDbModel.Category" Multiplicity="0..1" />
+          <End Role="Products" Type="B2CDbModel.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categories">
+              <PropertyRef Name="CategoryID" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderDetails_Orders">
+          <End Role="Orders" Type="B2CDbModel.Order" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="OrderDetails" Type="B2CDbModel.OrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="TxID" />
+            </Principal>
+            <Dependent Role="OrderDetails">
+              <PropertyRef Name="TxID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="B2CDbModelStoreContainer" CdmEntityContainer="B2CDbEntities">
+          <EntitySetMapping Name="Categories"><EntityTypeMapping TypeName="B2CDbModel.Category"><MappingFragment StoreEntitySet="Categories">
+            <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+            <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+            <ScalarProperty Name="Description" ColumnName="Description" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="OrderDetails"><EntityTypeMapping TypeName="B2CDbModel.OrderDetail"><MappingFragment StoreEntitySet="OrderDetails">
+            <ScalarProperty Name="ID" ColumnName="ID" />
+            <ScalarProperty Name="TxID" ColumnName="TxID" />
+            <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+            <ScalarProperty Name="Price" ColumnName="Price" />
+            <ScalarProperty Name="Qty" ColumnName="Qty" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Orders"><EntityTypeMapping TypeName="B2CDbModel.Order"><MappingFragment StoreEntitySet="Orders">
+            <ScalarProperty Name="TxID" ColumnName="TxID" />
+            <ScalarProperty Name="Purchaser" ColumnName="Purchaser" />
+            <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+            <ScalarProperty Name="Valid" ColumnName="Valid" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Products"><EntityTypeMapping TypeName="B2CDbModel.Product"><MappingFragment StoreEntitySet="Products">
+            <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+            <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+            <ScalarProperty Name="Price" ColumnName="Price" />
+            <ScalarProperty Name="ImageFileUrl" ColumnName="ImageFileUrl" />
+            <ScalarProperty Name="Description" ColumnName="Description" />
+            <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="TxSeeds"><EntityTypeMapping TypeName="B2CDbModel.TxSeed"><MappingFragment StoreEntitySet="TxSeeds">
+            <ScalarProperty Name="ID" ColumnName="ID" />
+            <ScalarProperty Name="TxID" ColumnName="TxID" />
+            <ScalarProperty Name="Description" ColumnName="Description" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="BtoCModel">
+        <EntityTypeShape EntityType="B2CDbModel.Category" Width="1.5" PointX="0.5" PointY="1.25" Height="1.9366666666666668" IsExpanded="true" />
+        <EntityTypeShape EntityType="B2CDbModel.OrderDetail" Width="1.5" PointX="3" PointY="5" Height="2.3637499999999996" IsExpanded="true" />
+        <EntityTypeShape EntityType="B2CDbModel.Order" Width="1.5" PointX="0.75" PointY="5" Height="2.1502083333333335" IsExpanded="true" />
+        <EntityTypeShape EntityType="B2CDbModel.Product" Width="1.5" PointX="3" PointY="1" Height="2.5772916666666656" IsExpanded="true" />
+        <EntityTypeShape EntityType="B2CDbModel.TxSeed" Width="1.5" PointX="5.75" PointY="0.75" Height="1.7231249999999996" IsExpanded="true" />
+        <AssociationConnector Association="B2CDbModel.FK_Products_Categories" ManuallyRouted="false">
+          <ConnectorPoint PointX="2" PointY="2.2183333333333333" />
+          <ConnectorPoint PointX="3" PointY="2.2183333333333333" />
+        </AssociationConnector>
+        <AssociationConnector Association="B2CDbModel.FK_OrderDetails_Orders" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="6.0751041666666667" />
+          <ConnectorPoint PointX="3" PointY="6.0751041666666667" />
+        </AssociationConnector>
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -10,6 +10,7 @@ namespace BtoCRazorDemo.Controllers
 {
     using BtoCRazorDemo.Models;
     using System.Diagnostics;
+    using System.Data.Objects.DataClasses;
 
     //[Authorize]
     public class ProductController : Controller
@@ -110,7 +111,7 @@ namespace BtoCRazorDemo.Controllers
             {
                 orderDetail = new OrderDetail()
                     {
-                        Order = order,
+                        Orders = order,
                         Price = 0,
                         Qty = 0,
                         //TxID = string.Empty,
@@ -132,7 +133,7 @@ namespace BtoCRazorDemo.Controllers
                     Purchaser = User.Identity.Name,
                     Valid = false,
                     TxID = txID,
-                    OrderDetails = new EntitySet<OrderDetail>()
+                    OrderDetails = new EntityCollection<OrderDetail>()
                 };
                 orderRepository.Add(order);
             }

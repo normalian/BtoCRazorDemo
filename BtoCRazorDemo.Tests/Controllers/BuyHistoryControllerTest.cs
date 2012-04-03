@@ -103,7 +103,7 @@ namespace BtoCDemo.Tests.Controllers
             ActionResult actual;
             actual = target.Index() as ViewResult;
             Assert.AreEqual(expected.FullName, actual.GetType().FullName);
-            Assert.AreEqual(typeof(IQueryable<BtoCDemo.Models.Order>), target.ViewData.Model.GetType());
+            Assert.AreEqual(typeof(IQueryable<BtoCRazorDemo.Models.Order>), target.ViewData.Model.GetType());
         }
 
 

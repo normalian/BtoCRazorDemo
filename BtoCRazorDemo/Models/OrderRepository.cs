@@ -18,41 +18,41 @@ namespace BtoCRazorDemo.Models
 
     public class OrderRepository : IOrderRepository<Order>
     {
-        readonly protected BtoCDataClassesDataContext dataContext;
+        readonly protected B2CDbEntities dbEntities;
 
         public OrderRepository()
         {
-            dataContext = new BtoCDataClassesDataContext();
+            dbEntities = new B2CDbEntities();
         }
 
         public IQueryable<Order> GetAll()
         {
-            return dataContext.Orders.AsQueryable();
+            return dbEntities.Orders.AsQueryable();
         }
 
         public Order GetByTxID(string txid)
         {
-            return dataContext.Orders.SingleOrDefault(order => order.TxID == txid);
+            return dbEntities.Orders.SingleOrDefault(order => order.TxID == txid);
         }
 
         public IQueryable<Order> GetByUsername(string username)
         {
-            return dataContext.Orders.Where(order => order.Purchaser == username && order.Valid);
+            return dbEntities.Orders.Where(order => order.Purchaser == username && order.Valid);
         }
 
         public void Add(Order order)
         {
-            dataContext.Orders.InsertOnSubmit(order);
+            dbEntities.Orders.AddObject(order);
         }
 
         public void Remove(Order order)
         {
-            dataContext.Orders.DeleteOnSubmit(order);
+            dbEntities.Orders.DeleteObject(order);
         }
 
         public void Save()
         {
-            dataContext.SubmitChanges();
+            dbEntities.SaveChanges();
         }
     }
 }

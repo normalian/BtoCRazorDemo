@@ -17,21 +17,21 @@ namespace BtoCRazorDemo.Models
 
     public class CategoryRepository : ICategoryRepository<Category>
     {
-        readonly protected BtoCDataClassesDataContext dataContext;
+        readonly protected B2CDbEntities dbEntities;
 
         public CategoryRepository()
         {
-            dataContext = new BtoCDataClassesDataContext();
+            dbEntities = new B2CDbEntities();
         }
 
         public IQueryable<Category> GetAll()
         {
-            return dataContext.Categories.AsQueryable();
+            return dbEntities.Categories.AsQueryable();
         }
 
         public Category GetByID(int id)
         {
-            var inst = dataContext.Categories.SingleOrDefault(category => category.CategoryID == id);
+            var inst = dbEntities.Categories.SingleOrDefault(category => category.CategoryID == id);
             if (inst == null)
             {
                 throw new ArgumentOutOfRangeException("categoryIDが不正だと思われる");
@@ -45,22 +45,22 @@ namespace BtoCRazorDemo.Models
             {
                 throw new ArgumentException("名前がNULLか空白です");
             }
-            return dataContext.Categories.SingleOrDefault(category => category.CategoryName == name);
+            return dbEntities.Categories.SingleOrDefault(category => category.CategoryName == name);
         }
 
         public void Add(Category category)
         {
-            dataContext.Categories.InsertOnSubmit(category);
+            dbEntities.AddToCategories(category);
         }
 
         public void Remove(Category category)
         {
-            dataContext.Categories.DeleteOnSubmit(category);
+            dbEntities.Categories.DeleteObject(category);
         }
 
         public void Save()
         {
-            dataContext.SubmitChanges();
+            dbEntities.SaveChanges();
         }
     }
 }
