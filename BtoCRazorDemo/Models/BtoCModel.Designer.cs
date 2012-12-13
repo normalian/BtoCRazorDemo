@@ -8,12 +8,13 @@
 //------------------------------------------------------------------------------
 
 using System;
+using System.ComponentModel;
+using System.Data.EntityClient;
 using System.Data.Objects;
 using System.Data.Objects.DataClasses;
-using System.Data.EntityClient;
-using System.ComponentModel;
-using System.Xml.Serialization;
+using System.Linq;
 using System.Runtime.Serialization;
+using System.Xml.Serialization;
 
 [assembly: EdmSchemaAttribute()]
 #region EDM リレーションシップのメタデータ
@@ -152,6 +153,7 @@ namespace BtoCRazorDemo.Models
         private ObjectSet<TxSeed> _TxSeeds;
 
         #endregion
+
         #region AddTo メソッド
     
         /// <summary>
@@ -195,11 +197,11 @@ namespace BtoCRazorDemo.Models
         }
 
         #endregion
+
     }
-    
 
     #endregion
-    
+
     #region エンティティ
     
     /// <summary>
@@ -224,6 +226,7 @@ namespace BtoCRazorDemo.Models
         }
 
         #endregion
+
         #region プリミティブ プロパティ
     
         /// <summary>
@@ -302,6 +305,7 @@ namespace BtoCRazorDemo.Models
         partial void OnDescriptionChanged();
 
         #endregion
+
     
         #region ナビゲーション プロパティ
     
@@ -328,6 +332,7 @@ namespace BtoCRazorDemo.Models
         }
 
         #endregion
+
     }
     
     /// <summary>
@@ -358,6 +363,7 @@ namespace BtoCRazorDemo.Models
         }
 
         #endregion
+
         #region プリミティブ プロパティ
     
         /// <summary>
@@ -460,6 +466,7 @@ namespace BtoCRazorDemo.Models
         partial void OnValidChanged();
 
         #endregion
+
     
         #region ナビゲーション プロパティ
     
@@ -486,6 +493,7 @@ namespace BtoCRazorDemo.Models
         }
 
         #endregion
+
     }
     
     /// <summary>
@@ -518,6 +526,7 @@ namespace BtoCRazorDemo.Models
         }
 
         #endregion
+
         #region プリミティブ プロパティ
     
         /// <summary>
@@ -644,6 +653,7 @@ namespace BtoCRazorDemo.Models
         partial void OnQtyChanged();
 
         #endregion
+
     
         #region ナビゲーション プロパティ
     
@@ -686,6 +696,7 @@ namespace BtoCRazorDemo.Models
         }
 
         #endregion
+
     }
     
     /// <summary>
@@ -710,6 +721,7 @@ namespace BtoCRazorDemo.Models
         }
 
         #endregion
+
         #region プリミティブ プロパティ
     
         /// <summary>
@@ -860,6 +872,7 @@ namespace BtoCRazorDemo.Models
         partial void OnCategoryIDChanged();
 
         #endregion
+
     
         #region ナビゲーション プロパティ
     
@@ -902,6 +915,7 @@ namespace BtoCRazorDemo.Models
         }
 
         #endregion
+
     }
     
     /// <summary>
@@ -928,6 +942,7 @@ namespace BtoCRazorDemo.Models
         }
 
         #endregion
+
         #region プリミティブ プロパティ
     
         /// <summary>
@@ -1006,9 +1021,11 @@ namespace BtoCRazorDemo.Models
         partial void OnDescriptionChanged();
 
         #endregion
+
     
     }
 
     #endregion
+
     
 }

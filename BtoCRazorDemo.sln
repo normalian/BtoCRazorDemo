@@ -1,9 +1,14 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BtoCRazorDemo", "BtoCRazorDemo\BtoCRazorDemo.csproj", "{BC2A8F7F-44E8-403A-9F30-11EF5E4BEBD2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BtoCRazorDemo.Tests", "BtoCRazorDemo.Tests\BtoCRazorDemo.Tests.csproj", "{A287AE58-EE3C-4449-8B62-6DF4076526D3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{598DE7FF-E791-43FB-B201-5B1021CF87E3}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\packages.config = .nuget\packages.config
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
