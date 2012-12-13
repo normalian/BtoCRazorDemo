@@ -60,8 +60,9 @@ namespace BtoCRazorDemo.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (Membership.ValidateUser(model.UserName, model.Password))
-                {
+                //TODO: 必ずログインできるので修正が必要
+                //if (Membership.ValidateUser(model.UserName, model.Password))
+                //{
                     FormsAuthentication.SetAuthCookie(model.UserName, model.RememberMe);
 
 
@@ -76,11 +77,11 @@ namespace BtoCRazorDemo.Controllers
                     {
                         return RedirectToAction("Index", "Home");
                     }
-                }
-                else
-                {
-                    ModelState.AddModelError("", "The user name or password provided is incorrect.");
-                }
+                //}
+                //else
+                //{
+                //    ModelState.AddModelError("", "The user name or password provided is incorrect.");
+                //}
             }
 
             // If we got this far, something failed, redisplay form
