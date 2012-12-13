@@ -185,6 +185,7 @@ namespace BtoCRazorDemo.Tests.Controllers
         ///A test for Delete
         ///</summary>
         [TestMethod()]
+        [ExpectedException(typeof(System.ArgumentNullException))]
         public void Delete02Test()
         {
             var orderRepository = new TestOrderRepository();
@@ -198,8 +199,9 @@ namespace BtoCRazorDemo.Tests.Controllers
             int expectedNum = beforeNum;
             RedirectToRouteResult actual = target.Delete(detailID) as RedirectToRouteResult;
             int actualNum = orderRepository.GetByTxID("1").OrderDetails.Count;
-            Assert.AreEqual(expectedNum, actualNum);
-            Assert.IsNotNull(actual);
+            //Assert.AreEqual(expectedNum, actualNum);
+            //Assert.IsNotNull(actual);
+            Assert.Fail("想定された例外 System.ArgumentNullException が発生しません");
         }
     }
 }

@@ -10,11 +10,11 @@ using System.Linq;
 using BtoCRazorDemo;
 using BtoCRazorDemo.Controllers;
 using BtoCRazorDemo.Tests.Models;
-using BtoCRazorDemo.Tests.Utils;
+//using BtoCRazorDemo.Tests.Utils;
 
 namespace BtoCDemo.Tests.Controllers
 {
-
+    using Moq;
 
     /// <summary>
     ///This is a test class for BuyHistoryControllerTest and is intended
@@ -81,7 +81,20 @@ namespace BtoCDemo.Tests.Controllers
         public void IndexTest01()
         {
             BuyHistoryController target = new BuyHistoryController(new TestOrderRepository());
-            ControllerContext context = new ControllerContext(new MockHttpContext(), new RouteData(), target);
+
+            //モックの作成
+            var mockHttpContextBase = new Mock<HttpContextBase>();
+            var mockIdentity = new Mock<IIdentity>();
+            var mockPrincipal = new Mock<IPrincipal>();
+
+            //ユーザ情報の設定＆httpContextオブジェクトの作成
+            mockIdentity.Setup(identity => identity.IsAuthenticated).Returns(true);
+            mockIdentity.Setup(identity => identity.Name).Returns("someUser");
+            mockPrincipal.Setup(principal => principal.Identity).Returns(mockIdentity.Object);
+            mockHttpContextBase.Setup(httpContextBase => httpContextBase.User)
+                .Returns(mockPrincipal.Object);
+
+            ControllerContext context = new ControllerContext(mockHttpContextBase.Object, new RouteData(), target);
             target.ControllerContext = context;
             Type expected = typeof(RedirectToRouteResult);
             ActionResult actual;
@@ -97,7 +110,20 @@ namespace BtoCDemo.Tests.Controllers
         public void IndexPostTest01()
         {
             BuyHistoryController target = new BuyHistoryController(new TestOrderRepository());
-            ControllerContext context = new ControllerContext(new MockHttpContext(), new RouteData(), target);
+
+            //モックの作成
+            var mockHttpContextBase = new Mock<HttpContextBase>();
+            var mockIdentity = new Mock<IIdentity>();
+            var mockPrincipal = new Mock<IPrincipal>();
+
+            //ユーザ情報の設定＆httpContextオブジェクトの作成
+            mockIdentity.Setup(identity => identity.IsAuthenticated).Returns(true);
+            mockIdentity.Setup(identity => identity.Name).Returns("someUser");
+            mockPrincipal.Setup(principal => principal.Identity).Returns(mockIdentity.Object);
+            mockHttpContextBase.Setup(httpContextBase => httpContextBase.User)
+                .Returns(mockPrincipal.Object);
+
+            ControllerContext context = new ControllerContext(mockHttpContextBase.Object, new RouteData(), target);
             target.ControllerContext = context;
             Type expected = typeof(ViewResult);
             ActionResult actual;
